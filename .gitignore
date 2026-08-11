@@ -1,0 +1,13 @@
+# Datasets / data
+ECG_DB/
+Person_01/
+dataset_results.csv
+demos/
+# Generated output/logs
+output.log
+
+# Python virtual environment
+MPenv/
+
+# Python cache
+__pycache__/

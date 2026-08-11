@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ECG Monitor</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div>
+
+            <h1>ECG MONITOR</h1>
+
+            <p>Real-time cardiac signal analysis</p>
+
+        </div>
+
+        <div class="connection">
+
+            <span id="statusDot"></span>
+
+            <span id="statusText">CONNECTING</span>
+
+        </div>
+
+    </header>
+
+
+    <!-- METRICS -->
+
+    <section class="metrics">
+
+        <div class="metric">
+
+            <div class="metric-label">
+                HEART RATE
+            </div>
+
+            <div class="metric-value"
+                 id="heartRate">
+
+                --
+
+            </div>
+
+            <div class="metric-unit">
+                BPM
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                R-PEAKS
+            </div>
+
+            <div class="metric-value"
+                 id="peakCount">
+
+                0
+
+            </div>
+
+            <div class="metric-unit">
+                DETECTED
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                SAMPLE RATE
+            </div>
+
+            <div class="metric-value">
+                500
+            </div>
+
+            <div class="metric-unit">
+                Hz
+            </div>
+
+        </div>
+
+    </section>
+
+    <div id="rhythmStatus">NORMAL</div>
+    <div id="alertMessage"></div>
+
+    <!-- RAW ECG -->
+
+    <section class="chart-section">
+
+        <div class="chart-title">
+
+            <span>RAW ECG</span>
+
+        </div>
+
+        <canvas id="rawChart"
+                height="200">
+        </canvas>
+
+    </section>
+
+
+    <!-- FILTERED ECG -->
+
+    <section class="chart-section">
+
+        <div class="chart-title">
+
+            <span>FILTERED ECG</span>
+
+        </div>
+
+        <canvas id="filteredChart"
+                height="200">
+        </canvas>
+
+    </section>
+
+
+    <!-- SQUARED SIGNAL -->
+
+    <section class="chart-section">
+
+        <div class="chart-title">
+
+            <span>QRS / SQUARED SIGNAL</span>
+
+        </div>
+
+        <canvas id="squaredChart"
+                height="200">
+        </canvas>
+
+        </section>
+
+
+        </div>
+
+
+<script src="{{ url_for('static', filename='socket.io.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='chart.js') }}"></script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
