@@ -205,6 +205,203 @@ background: #9ca3af;
 
 }
 
+/* Authentication and patient-list views reuse the monitor palette and cards. */
+.auth-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 18px; }
+.auth-card { width: 100%; max-width: 420px; background: white; padding: 28px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.auth-card h1, .auth-card h2 { margin: 0 0 10px; }
+.subtitle { color: #6b7280; font-size: 13px; margin: 0 0 24px; }
+.auth-card label { display: block; font-size: 11px; font-weight: bold; letter-spacing: 1px; color: #6b7280; margin: 14px 0 6px; }
+.auth-card input { width: 100%; border: 1px solid #d1d5db; border-radius: 6px; padding: 10px; font: inherit; }
+.primary-button, .secondary-button { display: block; width: 100%; border: 0; border-radius: 6px; padding: 11px 14px; margin-top: 20px; text-align: center; text-decoration: none; font: inherit; font-weight: bold; cursor: pointer; }
+.primary-button { color: white; background: #166534; }
+.secondary-button { color: #166534; background: #dcfce7; }
+.role-options { margin-top: 18px; }
+.role-options .primary-button, .role-options .secondary-button { margin-top: 10px; }
+.back-link { display: block; margin-top: 18px; text-align: center; color: #6b7280; font-size: 13px; }
+.form-message { border-radius: 6px; padding: 10px; font-size: 13px; }
+.form-message.error { color: #991b1b; background: #fee2e2; }
+.header-link { color: #166534; text-decoration: none; font-size: 11px; margin-right: 12px; }
+.patient-list { background: white; padding: 16px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.patient-row { display: flex; justify-content: space-between; align-items: center; color: #1f2933; text-decoration: none; padding: 14px 4px; border-bottom: 1px solid #e5e7eb; }
+.patient-row:last-child { border-bottom: 0; }
+.patient-row small { display: block; margin-top: 5px; color: #6b7280; font-size: 11px; }
+.view-record { color: #166534; font-size: 12px; font-weight: bold; }
+
+/* Focused ECG workspace: one large chart, with a persistent side selector. */
+.chart-workspace {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 1fr);
+    gap: 16px;
+    align-items: stretch;
+}
+
+.chart-switcher {
+    padding: 18px 12px;
+    background: #12251d;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, .16);
+}
+
+.switcher-label {
+    margin: 0 8px 14px;
+    color: #a7f3d0;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.chart-widget {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: #d1fae5;
+    text-align: left;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.chart-widget:hover { background: rgba(255,255,255,.08); transform: translateX(2px); }
+.chart-widget.active { background: #f0fdf4; border-color: #bbf7d0; color: #14532d; }
+.chart-widget strong, .chart-widget small { display: block; }
+.chart-widget strong { font-size: 13px; }
+.chart-widget small { margin-top: 3px; font-size: 10px; opacity: .72; }
+
+.widget-dot { width: 10px; height: 10px; flex: 0 0 10px; border-radius: 50%; }
+.raw-dot { background: #38bdf8; box-shadow: 0 0 0 4px rgba(56,189,248,.16); }
+.filtered-dot { background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.16); }
+.squared-dot { background: #fb7185; box-shadow: 0 0 0 4px rgba(251,113,133,.16); }
+
+.switcher-note { margin: 22px 8px 2px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.14); color: #d1fae5; font-size: 11px; line-height: 1.6; }
+.switcher-note span { color: #86efac; }
+
+.chart-stage { min-width: 0; }
+.chart-panel { display: none; min-height: 410px; margin-bottom: 0; padding: 20px; }
+.chart-panel.active { display: block; animation: chartReveal .22s ease; }
+.chart-panel canvas { max-height: 350px; }
+
+.chart-heading { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.chart-heading .chart-title { margin: 0; }
+.chart-heading p { margin: 5px 0 0; color: #64748b; font-size: 12px; }
+.live-badge { padding: 5px 8px; border-radius: 999px; color: #166534; background: #dcfce7; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+
+@keyframes chartReveal { from { opacity: .45; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Polish pass: keep the existing neutral monitor palette, with clearer depth and hierarchy. */
+body {
+    background: linear-gradient(135deg, #f4f6f8 0%, #edf4f1 100%);
+    min-height: 100vh;
+}
+
+.dashboard { padding: 28px 0 36px; }
+
+.header,
+.metric,
+.chart-section,
+.patient-list,
+.auth-card {
+    border: 1px solid rgba(203, 213, 225, 0.72);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+}
+
+.header {
+    padding: 20px 24px;
+    border-left: 4px solid #166534;
+}
+
+.header h1 { font-size: 24px; color: #12251d; }
+.header p { line-height: 1.5; }
+.header p strong { color: #166534; }
+
+.connection {
+    gap: 12px;
+    color: #475569;
+    white-space: nowrap;
+}
+
+.header-link {
+    margin: 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #f0fdf4;
+    transition: background .18s ease, transform .18s ease;
+}
+
+.header-link:hover { background: #dcfce7; transform: translateY(-1px); }
+
+#statusDot { box-shadow: 0 0 0 3px rgba(34, 197, 94, .12); }
+
+.metrics { gap: 14px; margin-bottom: 14px; }
+.metric { padding: 16px 18px; transition: transform .18s ease, box-shadow .18s ease; }
+.metric:hover { transform: translateY(-2px); box-shadow: 0 14px 26px rgba(15, 23, 42, .08); }
+.metric-value { color: #12251d; font-size: 29px; }
+.metric-unit { margin-top: 2px; }
+
+.chart-section { padding: 14px 16px 10px; margin-bottom: 12px; }
+.chart-title { color: #475569; font-size: 11px; margin-bottom: 8px; }
+
+.auth-page {
+    background: radial-gradient(circle at 12% 15%, rgba(22, 101, 52, .12), transparent 27%),
+                linear-gradient(135deg, #f4f6f8 0%, #eaf4ee 100%);
+}
+
+.auth-card {
+    max-width: 450px;
+    padding: 36px;
+    border-radius: 14px;
+}
+
+.auth-card h1 { color: #12251d; font-size: 28px; }
+.auth-card h2 { color: #12251d; font-size: 20px; margin-top: 28px; }
+.subtitle { line-height: 1.5; }
+
+.auth-card input {
+    padding: 12px;
+    background: #f8fafc;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: #22c55e;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, .14);
+}
+
+.primary-button, .secondary-button { transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+.primary-button:hover, .secondary-button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(22, 101, 52, .18); }
+.primary-button { background: linear-gradient(135deg, #166534, #15803d); }
+.secondary-button { border: 1px solid #bbf7d0; }
+.back-link:hover { color: #166534; }
+
+.patient-list { padding: 20px; border-radius: 12px; }
+.patient-row { padding: 18px 12px; border-radius: 8px; transition: background .18s ease, transform .18s ease; }
+.patient-row:hover { background: #f0fdf4; transform: translateX(3px); }
+.patient-row strong { font-size: 15px; }
+.view-record { padding: 8px 10px; border-radius: 6px; background: #dcfce7; }
+
+@media (max-width: 640px) {
+    .dashboard { width: 92%; padding-top: 16px; }
+    .header { align-items: flex-start; gap: 16px; flex-direction: column; }
+    .metrics { grid-template-columns: 1fr; gap: 9px; }
+    .connection { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+    .auth-card { padding: 26px 22px; }
+    .patient-row { align-items: flex-start; gap: 12px; flex-direction: column; }
+    .chart-workspace { grid-template-columns: 1fr; gap: 10px; }
+    .chart-switcher { padding: 12px; }
+    .switcher-label, .switcher-note { display: none; }
+    .chart-widget { display: inline-flex; width: calc(33.333% - 4px); min-height: 64px; vertical-align: top; padding: 8px; gap: 7px; }
+    .chart-widget strong { font-size: 11px; }
+    .chart-widget small { display: none; }
+    .chart-panel { min-height: 325px; padding: 14px; }
+    .chart-panel canvas { max-height: 280px; }
+}
+
 ```css
 /* --------------------------------------------------
  *   RHYTHM STATUS / ALERT BUTTON

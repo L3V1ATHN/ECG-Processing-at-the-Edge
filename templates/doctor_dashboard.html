@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor dashboard · ECG Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="dashboard">
+    <header class="header">
+        <div><h1>ECG MONITOR</h1><p>Welcome, Dr. {{ doctor.name }}</p></div>
+        <div class="connection"><a class="header-link" href="{{ url_for('logout') }}">LOGOUT</a></div>
+    </header>
+    <section class="patient-list">
+        <div class="chart-title">YOUR ASSIGNED PATIENTS</div>
+        {% for patient in patients %}
+        <a class="patient-row" href="{{ url_for('doctor_patient', patient_id=patient.id) }}">
+            <span><strong>{{ patient.name }}</strong><small>{{ patient.id }} · {{ patient.source }}</small></span>
+            <span class="view-record">View ECG →</span>
+        </a>
+        {% endfor %}
+    </section>
+</main>
+</body>
+</html>

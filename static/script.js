@@ -103,6 +103,44 @@ const squaredChart = new Chart(squaredCtx, {
     }
 });
 
+// --------------------------------------------------
+// Chart workspace selector
+// --------------------------------------------------
+
+const chartByName = {
+    raw: rawChart,
+    filtered: filteredChart,
+    squared: squaredChart
+};
+
+const chartWidgets = document.querySelectorAll(".chart-widget");
+const chartPanels = document.querySelectorAll(".chart-panel");
+
+chartWidgets.forEach(function(widget) {
+
+    widget.addEventListener("click", function() {
+
+        const selectedChart = widget.dataset.chartTarget;
+
+        chartWidgets.forEach(function(button) {
+            button.classList.toggle("active", button === widget);
+        });
+
+        chartPanels.forEach(function(panel) {
+            panel.classList.toggle(
+                "active",
+                panel.dataset.chartPanel === selectedChart
+            );
+        });
+
+        // Chart.js needs a resize after its previously hidden canvas is shown.
+        chartByName[selectedChart].resize();
+        chartByName[selectedChart].update("none");
+
+    });
+
+});
+
 
 // --------------------------------------------------
 // Connection
@@ -367,3 +405,12 @@ socket.on("stream_end", function() {
 
 });
 
+socket.on("stream_error", function(data) {
+
+    document.getElementById("statusText")
+    .textContent = data.message;
+
+    document.getElementById("statusDot")
+    .style.background = "#ef4444";
+
+});

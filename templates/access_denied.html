@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access restricted · ECG Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body><main class="auth-page"><section class="auth-card">
+    <h1>ECG MONITOR</h1><h2>Access restricted</h2><p class="form-message error">{{ message }}</p>
+    <a class="primary-button" href="{{ url_for('home') }}">Return to dashboard</a>
+</section></main></body>
+</html>

@@ -3,6 +3,7 @@ ECG_DB/
 Person_01/
 dataset_results.csv
 demos/
+Program/
 # Generated output/logs
 output.log
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select role · ECG Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="auth-page">
+    <section class="auth-card role-card">
+        <h1>ECG MONITOR</h1>
+        <p class="subtitle">Real-time cardiac signal analysis</p>
+        <h2>Select your role</h2>
+        <div class="role-options">
+            <a class="primary-button" href="{{ url_for('doctor_login') }}">Doctor</a>
+            <a class="secondary-button" href="{{ url_for('patient_login') }}">Patient</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

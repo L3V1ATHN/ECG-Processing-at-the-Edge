@@ -30,9 +30,17 @@
 
             <p>Real-time cardiac signal analysis</p>
 
+            <p><strong>{{ patient.name }}</strong> · {{ patient_id }} · {{ patient.source }}</p>
+
         </div>
 
         <div class="connection">
+
+            {% if session.role == "doctor" %}
+            <a class="header-link" href="{{ url_for('doctor_dashboard') }}">PATIENTS</a>
+            {% endif %}
+
+            <a class="header-link" href="{{ url_for('logout') }}">LOGOUT</a>
 
             <span id="statusDot"></span>
 
@@ -108,55 +116,39 @@
     <div id="rhythmStatus">NORMAL</div>
     <div id="alertMessage"></div>
 
-    <!-- RAW ECG -->
+    <!-- One active chart at a time; selector preserves all three live streams. -->
+    <section class="chart-workspace">
+        <aside class="chart-switcher" aria-label="ECG display selector">
+            <div class="switcher-label">SIGNAL VIEW</div>
+            <button class="chart-widget active" type="button" data-chart-target="raw">
+                <span class="widget-dot raw-dot"></span><span><strong>Raw ECG</strong><small>Original signal</small></span>
+            </button>
+            <button class="chart-widget" type="button" data-chart-target="filtered">
+                <span class="widget-dot filtered-dot"></span><span><strong>Filtered ECG</strong><small>Noise reduced</small></span>
+            </button>
+            <button class="chart-widget" type="button" data-chart-target="squared">
+                <span class="widget-dot squared-dot"></span><span><strong>QRS / Peaks</strong><small>Detected activity</small></span>
+            </button>
+            <div class="switcher-note">Live stream<br><span>500 Hz sampling</span></div>
+        </aside>
 
-    <section class="chart-section">
+        <div class="chart-stage">
+            <section class="chart-section chart-panel active" data-chart-panel="raw">
+                <div class="chart-heading"><div><div class="chart-title">RAW ECG</div><p>Unprocessed cardiac waveform</p></div><span class="live-badge">LIVE</span></div>
+                <canvas id="rawChart" height="300"></canvas>
+            </section>
 
-        <div class="chart-title">
+            <section class="chart-section chart-panel" data-chart-panel="filtered">
+                <div class="chart-heading"><div><div class="chart-title">FILTERED ECG</div><p>Smoothed for signal clarity</p></div><span class="live-badge">LIVE</span></div>
+                <canvas id="filteredChart" height="300"></canvas>
+            </section>
 
-            <span>RAW ECG</span>
-
+            <section class="chart-section chart-panel" data-chart-panel="squared">
+                <div class="chart-heading"><div><div class="chart-title">QRS / SQUARED SIGNAL</div><p>R-peak detection activity</p></div><span class="live-badge">LIVE</span></div>
+                <canvas id="squaredChart" height="300"></canvas>
+            </section>
         </div>
-
-        <canvas id="rawChart"
-                height="200">
-        </canvas>
-
     </section>
-
-
-    <!-- FILTERED ECG -->
-
-    <section class="chart-section">
-
-        <div class="chart-title">
-
-            <span>FILTERED ECG</span>
-
-        </div>
-
-        <canvas id="filteredChart"
-                height="200">
-        </canvas>
-
-    </section>
-
-
-    <!-- SQUARED SIGNAL -->
-
-    <section class="chart-section">
-
-        <div class="chart-title">
-
-            <span>QRS / SQUARED SIGNAL</span>
-
-        </div>
-
-        <canvas id="squaredChart"
-                height="200">
-        </canvas>
-
-        </section>
 
 
         </div>
