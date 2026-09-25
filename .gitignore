@@ -12,3 +12,6 @@ MPenv/
 
 # Python cache
 __pycache__/
+
+#Recordings
+recordings/

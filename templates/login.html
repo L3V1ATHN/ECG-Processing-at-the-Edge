@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ role }} login · ECG Monitor</title>
+    <title>Login · ECG Monitor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <main class="auth-page">
     <form class="auth-card" method="post">
         <h1>ECG MONITOR</h1>
-        <p class="subtitle">{{ role }} Login</p>
+        <p class="subtitle">Real-time cardiac signal analysis</p>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% for category, message in messages %}<p class="form-message {{ category }}">{{ message }}</p>{% endfor %}
         {% endwith %}
@@ -19,7 +19,6 @@
         <label for="password">Password</label>
         <input id="password" name="password" type="password" required>
         <button class="primary-button" type="submit">Login</button>
-        <a class="back-link" href="{{ url_for('role') }}">← Back to role selection</a>
     </form>
 </main>
 </body>
